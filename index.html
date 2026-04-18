@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pallavi Jangid — Art Director</title>
+<meta name="description" content="Pallavi Jangid — Art Director. Portfolio of brand, campaign, editorial and motion work." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0e;
+    --fg: #e9e9e7;
+    --fg-muted: #8b8b88;
+    --fg-dim: #5a5a58;
+    --border: #1e1e1e;
+    --card: #141414;
+    --accent: #ff6b1a;
+    --radius: 6px;
+  }
+  html[data-theme="light"] {
+    --bg: #f3f1ec;
+    --fg: #141414;
+    --fg-muted: #5a5a58;
+    --fg-dim: #9a9a96;
+    --border: #e2dfd7;
+    --card: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: background 0.35s ease, color 0.35s ease;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--accent); }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    height: 100vh;
+  }
+
+  /* ========== LEFT: STATIC SIDEBAR ========== */
+  .left {
+    position: relative;
+    padding: 32px 32px 24px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 2px;
+  }
+  .brand-logo {
+    width: 14px; height: 14px;
+    background: var(--fg);
+    border-radius: 50%;
+    transform: translateY(2px);
+  }
+  .brand-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 18px;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+  }
+
+  .role     { color: var(--fg-muted); margin-top: 6px; }
+  .contacts { margin-top: 10px; color: var(--fg-muted); }
+  .contacts a { display: block; color: var(--fg); }
+  .contacts .arrow { color: var(--fg-dim); margin-right: 6px; }
+
+  .block { margin-top: 28px; }
+  .label {
+    color: var(--fg-dim);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+  }
+
+  .manifesto {
+    font-family: 'Fraunces', Georgia, serif;
+    text-transform: none;
+    font-size: 16px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    max-width: 28ch;
+  }
+  .manifesto em { font-style: italic; color: var(--fg-muted); }
+
+  .socials a { display: block; color: var(--fg); }
+  .socials .arrow { color: var(--fg-dim); margin-right: 6px; }
+  .socials a:hover { color: var(--accent); }
+
+  /* Folders grid */
+  .folders {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .folder {
+    cursor: pointer;
+    text-align: center;
+    padding: 6px 4px 8px;
+    border-radius: 6px;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .folder:hover { background: var(--card); transform: translateY(-2px); }
+  .folder.active { background: var(--card); }
+  .folder-tile {
+    width: 100%;
+    aspect-ratio: 1.15 / 1;
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg, var(--card) 0%, transparent 100%);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .folder-tile::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 8%;
+    width: 38%; height: 4px;
+    background: var(--border);
+    border-radius: 0 0 3px 3px;
+  }
+  .folder-tag {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    padding: 2px 5px;
+    border: 1px solid var(--fg-dim);
+    color: var(--fg);
+    background: var(--bg);
+    border-radius: 2px;
+  }
+  .folder-name {
+    font-size: 10px;
+    color: var(--fg-muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* Left footer */
+  .left-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--fg-dim);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+  .left-footer .loc span { color: var(--fg-muted); margin-right: 10px; }
+
+  /* ========== RIGHT: SCROLLABLE STAGE ========== */
+  .right {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 32px 48px 120px;
+    scroll-behavior: smooth;
+  }
+  .right::-webkit-scrollbar { width: 6px; }
+  .right::-webkit-scrollbar-track { background: transparent; }
+  .right::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .stage-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+  .stage-title {
+    font-family: 'Fraunces', Georgia, serif;
+    text-transform: none;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--fg-muted);
+  }
+  .stage-count { color: var(--fg-dim); font-size: 10px; }
+
+  .project {
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: rise 0.8s ease forwards;
+  }
+  .project:nth-child(2) { animation-delay: 0.05s; }
+  .project:nth-child(3) { animation-delay: 0.1s; }
+  .project:nth-child(4) { animation-delay: 0.15s; }
+  .project:nth-child(5) { animation-delay: 0.2s; }
+
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .project-meta {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 24px;
+    align-items: baseline;
+    margin-bottom: 14px;
+  }
+  .project-title {
+    font-family: 'Fraunces', Georgia, serif;
+    text-transform: none;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .project-tag { color: var(--fg-muted); font-size: 10px; }
+  .project-year { color: var(--fg-dim); font-size: 10px; }
+
+  .project-canvas {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+    background: var(--card);
+    transition: transform 0.5s ease;
+  }
+  .project:hover .project-canvas { transform: translateY(-4px); }
+
+  /* Placeholder canvas art — gradients + CSS shapes */
+  .c1 { background:
+    radial-gradient(800px 300px at 20% 40%, rgba(255,107,26,0.25), transparent 60%),
+    radial-gradient(500px 300px at 80% 70%, rgba(255,255,255,0.05), transparent 70%),
+    #0a0a0a;
+  }
+  .c2 { background:
+    repeating-linear-gradient(135deg, #151515 0 22px, #0f0f0f 22px 44px);
+  }
+  .c3 { background:
+    conic-gradient(from 210deg at 50% 50%, #161616, #1d1d1d, #0a0a0a, #161616);
+  }
+  .c4 { background:
+    linear-gradient(180deg, #0a0a0a, #141414 40%, #0a0a0a),
+    radial-gradient(400px 200px at 50% 120%, rgba(255,107,26,0.2), transparent);
+  }
+  html[data-theme="light"] .c1 { background: radial-gradient(800px 300px at 20% 40%, rgba(255,107,26,0.18), transparent 60%), #ebe7de; }
+  html[data-theme="light"] .c2 { background: repeating-linear-gradient(135deg, #ece8df 0 22px, #e2ddd1 22px 44px); }
+  html[data-theme="light"] .c3 { background: conic-gradient(from 210deg at 50% 50%, #e8e4d9, #f1ede3, #dad5c8, #e8e4d9); }
+  html[data-theme="light"] .c4 { background: linear-gradient(180deg, #f1ede3, #e2ddd1 40%, #f1ede3); }
+
+  .canvas-label {
+    position: absolute;
+    left: 20px; bottom: 16px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+  }
+  .canvas-shape {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 42%;
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--fg-dim);
+    border-radius: 999px;
+    opacity: 0.6;
+  }
+  .canvas-shape.square { border-radius: 6px; transform: translate(-50%, -50%) rotate(8deg); }
+  .canvas-shape.hex {
+    clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
+    border: none;
+    background: rgba(255,107,26,0.35);
+  }
+
+  /* Play section */
+  .play-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 60px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .play-title {
+    font-family: 'Fraunces', Georgia, serif;
+    text-transform: none;
+    font-size: 18px;
+    font-style: italic;
+  }
+  .play-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .play-tile {
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    background: var(--card);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .play-tile:hover { transform: scale(1.02); }
+  .play-tile .t {
+    position: absolute; left: 10px; bottom: 8px;
+    font-size: 9px; color: var(--fg-muted);
+  }
+  .p1 { background: radial-gradient(circle at 30% 30%, #ff6b1a 0%, transparent 50%), #111; }
+  .p2 { background: repeating-linear-gradient(0deg, #0f0f0f 0 4px, #1a1a1a 4px 8px); }
+  .p3 { background: conic-gradient(from 0deg, #111, #222, #111); }
+  .p4 { background: linear-gradient(45deg, #1a1a1a 25%, transparent 25%) 0 0/14px 14px, #0f0f0f; }
+  .p5 { background: radial-gradient(circle at 70% 70%, rgba(255,255,255,0.08), transparent 50%), #121212; }
+  .p6 { background: linear-gradient(180deg, #0f0f0f, #1c1c1c); }
+
+  /* Theme toggle */
+  .theme-toggle {
+    position: fixed;
+    right: 24px; bottom: 18px;
+    width: 40px; height: 22px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    transition: background 0.3s ease;
+    z-index: 50;
+  }
+  .theme-toggle .knob {
+    width: 16px; height: 16px;
+    background: var(--fg);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+  html[data-theme="light"] .theme-toggle .knob { transform: translateX(16px); }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    body { overflow-y: auto; }
+    .layout { grid-template-columns: 1fr; height: auto; }
+    .left { border-right: none; border-bottom: 1px solid var(--border); padding: 24px; }
+    .right { padding: 24px 24px 80px; height: auto; }
+    .folders { grid-template-columns: repeat(4, 1fr); }
+    .play-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ========== LEFT ========== -->
+  <aside class="left">
+    <div class="brand">
+      <span class="brand-logo"></span>
+      <span class="brand-name">Pallavi Jangid.</span>
+    </div>
+    <div class="role">Art Director.</div>
+
+    <div class="contacts">
+      <a href="tel:+918208526890"><span class="arrow">→</span>+91 8208 526 890</a>
+      <a href="mailto:pallavijangid1999@gmail.com"><span class="arrow">→</span>pallavijangid1999@gmail.com</a>
+    </div>
+
+    <div class="block">
+      <p class="manifesto">Directing attention.<br><em>Shaping feeling.</em></p>
+    </div>
+
+    <div class="block socials">
+      <a href="./resume.pdf" target="_blank"><span class="arrow">→</span>Resume</a>
+      <a href="#" target="_blank"><span class="arrow">→</span>Instagram</a>
+      <a href="#" target="_blank"><span class="arrow">→</span>Behance</a>
+      <a href="#" target="_blank"><span class="arrow">→</span>LinkedIn</a>
+    </div>
+
+    <div class="block">
+      <div class="label">— Selected Work</div>
+      <div class="folders">
+        <div class="folder active" data-target="p-campaign">
+          <div class="folder-tile"><span class="folder-tag">01</span></div>
+          <div class="folder-name">Campaign</div>
+        </div>
+        <div class="folder" data-target="p-brand">
+          <div class="folder-tile"><span class="folder-tag">02</span></div>
+          <div class="folder-name">Brand</div>
+        </div>
+        <div class="folder" data-target="p-editorial">
+          <div class="folder-tile"><span class="folder-tag">03</span></div>
+          <div class="folder-name">Editorial</div>
+        </div>
+        <div class="folder" data-target="p-motion">
+          <div class="folder-tile"><span class="folder-tag">04</span></div>
+          <div class="folder-name">Motion</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="left-footer">
+      <div class="loc"><span id="loc">India</span><span id="clock">00:00</span></div>
+      <div>Updated 04.2026</div>
+    </div>
+  </aside>
+
+  <!-- ========== RIGHT ========== -->
+  <main class="right" id="stage">
+
+    <div class="stage-head">
+      <div class="stage-title">Selected work, 2022 — 2026</div>
+      <div class="stage-count">(4)</div>
+    </div>
+
+    <article class="project" id="p-campaign">
+      <div class="project-meta">
+        <div class="project-title">Project 01 — Campaign</div>
+        <div class="project-tag">Art Direction / Print</div>
+        <div class="project-year">2026</div>
+      </div>
+      <div class="project-canvas c1">
+        <div class="canvas-shape hex"></div>
+        <div class="canvas-label">01 — Replace with campaign still</div>
+      </div>
+    </article>
+
+    <article class="project" id="p-brand">
+      <div class="project-meta">
+        <div class="project-title">Project 02 — Brand Identity</div>
+        <div class="project-tag">Systems / Type</div>
+        <div class="project-year">2025</div>
+      </div>
+      <div class="project-canvas c2">
+        <div class="canvas-shape square"></div>
+        <div class="canvas-label">02 — Replace with brand mark</div>
+      </div>
+    </article>
+
+    <article class="project" id="p-editorial">
+      <div class="project-meta">
+        <div class="project-title">Project 03 — Editorial</div>
+        <div class="project-tag">Layout / Direction</div>
+        <div class="project-year">2025</div>
+      </div>
+      <div class="project-canvas c3">
+        <div class="canvas-shape"></div>
+        <div class="canvas-label">03 — Replace with spread</div>
+      </div>
+    </article>
+
+    <article class="project" id="p-motion">
+      <div class="project-meta">
+        <div class="project-title">Project 04 — Motion</div>
+        <div class="project-tag">Titles / Loops</div>
+        <div class="project-year">2024</div>
+      </div>
+      <div class="project-canvas c4">
+        <div class="canvas-shape hex"></div>
+        <div class="canvas-label">04 — Replace with motion frame</div>
+      </div>
+    </article>
+
+    <div class="play-head">
+      <div class="play-title">Fun / Play</div>
+      <div class="stage-count">Experiments, off-hours, sketches</div>
+    </div>
+
+    <div class="play-grid">
+      <div class="play-tile p1"><div class="t">Sketch 01</div></div>
+      <div class="play-tile p2"><div class="t">Type test</div></div>
+      <div class="play-tile p3"><div class="t">Collage</div></div>
+      <div class="play-tile p4"><div class="t">Pattern</div></div>
+      <div class="play-tile p5"><div class="t">Poster</div></div>
+      <div class="play-tile p6"><div class="t">Loop</div></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Theme toggle -->
+<button class="theme-toggle" aria-label="Toggle theme"><span class="knob"></span></button>
+
+<script>
+  // Clock
+  function tick() {
+    const d = new Date();
+    const h = String(d.getHours()).padStart(2, '0');
+    const m = String(d.getMinutes()).padStart(2, '0');
+    const s = String(d.getSeconds()).padStart(2, '0');
+    const el = document.getElementById('clock');
+    if (el) el.textContent = `${h}:${m}:${s}`;
+  }
+  setInterval(tick, 1000); tick();
+
+  // Folder → scroll right panel to project
+  const stage = document.getElementById('stage');
+  document.querySelectorAll('.folder').forEach(f => {
+    f.addEventListener('click', () => {
+      document.querySelectorAll('.folder').forEach(x => x.classList.remove('active'));
+      f.classList.add('active');
+      const target = document.getElementById(f.dataset.target);
+      if (target) stage.scrollTo({ top: target.offsetTop - 24, behavior: 'smooth' });
+    });
+  });
+
+  // Theme toggle
+  const btn = document.querySelector('.theme-toggle');
+  btn.addEventListener('click', () => {
+    const html = document.documentElement;
+    const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+    html.dataset.theme = next;
+    localStorage.setItem('theme', next);
+  });
+  const saved = localStorage.getItem('theme');
+  if (saved) document.documentElement.dataset.theme = saved;
+</script>
+
+</body>
+</html>
